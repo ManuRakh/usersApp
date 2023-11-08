@@ -49,7 +49,7 @@ async function getUserInfo (userId = "") {
     return result;
 }
   
-  initializeUserTable();
+  initializeUserTable(); //normally it should be a migration script, not a running while starting the server, but in the task definition we had to initialize it while starting the server
 
   module.exports = {
     updateBalance,
