@@ -41,9 +41,9 @@ const userService = require('./users.service'); // Подключаем серв
 router.post('/balance', async (req, res) => {
   try {
     console.log(req.body)
-    const { username, amount } = req.body;
+    const { userId, amount } = req.body;
 
-    const result = await userService.updateBalance(username, amount);
+    const result = await userService.updateBalance(userId, amount);
 
     return res.status(200).json(result);
   } catch (error) {
@@ -58,7 +58,7 @@ router.post('/balance', async (req, res) => {
  *     description: Get user balance by username
  *     parameters:
  *       - in: query
- *         name: username
+ *         name: userId
  *         description: The username to retrieve for
  *         required: true
  *         type: string
@@ -75,9 +75,9 @@ router.post('/balance', async (req, res) => {
 router.get('/', async (req, res) => {
     try {
       console.log(req.body)
-      const { username } = req.query;
+      const { userId } = req.query;
   
-      const result = await userService.getUserInfo(username);
+      const result = await userService.getUserInfo(userId);
   
       return res.status(200).json(result);
     } catch (error) {

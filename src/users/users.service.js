@@ -26,8 +26,8 @@ async function initializeUserTable() {
     }
 }
 
-async function updateBalance(username, amount) {
-    const user = await getUserInfo(username);
+async function updateBalance(userId, amount) {
+    const user = await getUserInfo(userId);
 
     if (!user) {
     return { status: 404, error: 'User not found' };
@@ -42,8 +42,11 @@ async function updateBalance(username, amount) {
     return { ...updatedUser.dataValues };
 }
 
-async function getUserInfo (username) {
-    return UserModel.findOne({ where: { username } });
+async function getUserInfo (userId = "") {
+    const result = await UserModel.findOne({ where: { id: userId } });
+    if (!result) throw new Error(`User ${userId} does not exist`);
+
+    return result;
 }
   
   initializeUserTable();
